@@ -39,17 +39,34 @@ std::string test(std::string x) {
   return x;
 }
 
+// when passing variables to reference perimeter, only pass declared variable, unless using const in front of the perimeter
+// template : flexability on the perimeter type
+template <typename T>
+void print(const T & s) {
+  std::cout << s << std::endl;
+}
+template<typename T>
+void my_swap(T & a, T & b) {
+  std::cout << a << " " << b << std::endl;
+  // a = b;
+    std::cout << a << " " << b << std::endl;
+}
 int main () {
   // int x = times2(2);
   // std::cout << x << std::endl;
-  int min,max;
-  min_max(34,6, min,max);
-  std::cout << min << " " << max << std::endl;
-  std::string s = "Hello";
-  fun(s);
-  std::cout << s << std::endl;
+  // int min,max;
+  // min_max(34,6, min,max);
+  // std::cout << min << " " << max << std::endl;
+  // std::string s = "Hello";
+  // fun(s);
+  // std::cout << s << std::endl;
 
-  std::cout << test("yes") << std::endl;
+  // std::cout << s << std::endl;
+  // print("World");
+  // print<double>(2);
+  // print(2.3);
+  my_swap(1,5);
+  
   return 0;
 
 }
