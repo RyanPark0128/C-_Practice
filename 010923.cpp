@@ -47,8 +47,10 @@ void print(const T & s) {
 }
 template<typename T>
 void my_swap(T & a, T & b) {
-  std::cout << a << " " << b << std::endl;
-  // a = b;
+    T temp = a;
+    a = b;
+    b = temp;
+
     std::cout << a << " " << b << std::endl;
 }
 int main () {
@@ -65,7 +67,9 @@ int main () {
   // print("World");
   // print<double>(2);
   // print(2.3);
-  my_swap(1,5);
+  int x = 1;
+  int y = 5;
+  my_swap(x,y);
   
   return 0;
 
