@@ -39,10 +39,7 @@ int playgame() {
   int sum = 0;
   bool winner;
   rollDice(sum);
-  while (!calculateResult(sum, winner)) {
-      rollDice(sum);
-  }
-
+  calculateResult(sum, winner);
   return winner;
 }
 
