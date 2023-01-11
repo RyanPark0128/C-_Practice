@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <fstream>
+
 
 
 void multiloop (std::vector<std::vector<int>> & m) {
@@ -14,7 +16,18 @@ void multiloop (std::vector<std::vector<int>> & m) {
 }
 
 int main () {
+  std::ifstream fin;
+  std::string s;
+
+  fin.open("./example.txt");
+  if (fin.is_open()) {
+    while (getline(fin, line)) {
+      std::cout << line << std::endl;
+    }
+  }
   std::vector<std::vector<int>> m (10, std::vector<int>(5));
   multiloop(m);
   return 0;
 }
+
+
