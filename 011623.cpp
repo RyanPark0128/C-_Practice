@@ -47,10 +47,15 @@ bool is_pali(std::string s) {
 int main () {
   std::vector<int> v = {1,2,3,4,5,6};
   // std::cout<< sum_vect(v,0,v.size()-1) <<std::endl;
-  std::cout << std::boolalpha << is_pali("racecar") <<std::endl;
-  std::cout << std::boolalpha << is_pali("abc") << std::endl;
-  std::cout << std::boolalpha << is_pali("tuyyut") <<std::endl;
-  std::cout << std::boolalpha << is_pali("tuy") <<std::endl; 
-  std::cout << std::boolalpha << is_pali("abba") <<std::endl;
+  // std::cout << std::boolalpha << is_pali("racecar") <<std::endl;
+  // std::cout << std::boolalpha << is_pali("abc") << std::endl;
+  // std::cout << std::boolalpha << is_pali("tuyyut") <<std::endl;
+  // std::cout << std::boolalpha << is_pali("tuy") <<std::endl; 
+  // std::cout << std::boolalpha << is_pali("abba") <<std::endl;
+  std::string s = "asd";
+  std::string s2 = "asd";
+  bool x = s == s2;
+
+  std::cout << x << std::endl;
   return 0;
 }
