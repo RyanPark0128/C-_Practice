@@ -28,7 +28,7 @@
 // combination function takes in vector and user input to generate all the possible combination from user input
 //input: The function takes in string vector and user input as string
 //output: The function returns nothing but instead add each combination to vector by push_back method.
-void combination (std::vector<std::string> & v, std::string remainder, std::string s = "") {
+void combination (std::vector<std::string> & v, const std::string & remainder, std::string s = "") {
   // This is our base case. When the size of the string r equals 0 it should add result string to vector.
   if (remainder.size() == 0) {
     v.push_back(s);
