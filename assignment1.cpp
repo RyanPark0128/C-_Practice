@@ -56,10 +56,12 @@ void combination (std::vector<std::string> & v, const std::string & remainder, s
 // printCombination function takes in a vector and print them each by each using loop;
 // input: vector that needs to be printed
 // output: no output, just prints them
-void printCombination(std::vector<std::string> & v) {
-  for (int i=0; i < v.size(); i++) {
-    std::cout << v[i] << std::endl;
+void printCombination(std::vector<std::string> & v, int n) {
+  if (n == 0) {
+    return;
   }
+  printCombination(v, n-1);
+  std::cout << v[n-1] << std::endl;
 }
 
 // userInput function validates and process user input.
@@ -95,10 +97,9 @@ int main () {
   std::vector<std::string> v;
 
   // once I get the validated user input, I simply run my recursion to get the combinations
-  std::cout << "printing all combinations" << std::endl;
   combination(v, y);
-  printCombination(v);
-
+  std::cout << "printing all combinations" << std::endl;
+  printCombination(v, v.size());
 
   return 0;
 }
