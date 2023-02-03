@@ -67,7 +67,7 @@ bool path_finder (std::vector<std::vector<int>> & v,std::vector<std::vector<char
     }
   }
 
-  // if all direction fails, mark the current position with '-' and returns false because correct path does not exist on this instance.
+  // if all direction fails, mark the current position with '-' and returns false because correct path does not exist on this instance. returns false
   map[row][col] = '-';
   return false;
 }
