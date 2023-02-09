@@ -1,0 +1,34 @@
+Initial thoughts:
+
+I thought that I needed few loops to generate, print, and combine two vectors.
+I would use a for loop to first populate random integers in two vectors and print them.
+For combining two vectors, I would use push_back to add value to new vector.
+It would be easier to just implement any sorting algorithm to sort the vector, but
+because the instruction says the vectors are in either ascending/descending order,
+we can finish the job without using sorting algorithm. The reason for not using the sorting
+algorithm is that sorting algorithm has runtime complexity of O(n log n) which is slower compare to
+using a single loop (O(n)). So I decided to use only a loop to combine the vectors in non-descending order
+
+Implementation: 
+Because both of the vector will be in either ascending/descending order, we can use a while loop to compare
+items from two vector and selectively push_back to our newly created vector.
+
+For creating ascending vector, I used a loop and added srand to previous value each time in a loop.
+For creating descending vector, I used a loop and subtracted srand to the previous value each time in a loop.
+
+When combining two vectors, I used similiary algorithm from the program 1 and use two-pointers to combine vectors.
+i will start at 0 and will be used to access first vector which is in ascending order.
+j will start from (v.size() -1) and will be used to access second vector which is in descending order
+Because the second vector is in descending order, it means that the last item of the vector is the largest value,
+and I use this to compare with the first vector (ascending) to push_back to our combined vecter in order.
+The loop stops when both vectors dont have any items remaining to add.
+
+I have 4 if statements which are:
+1) if i > first_vector.size(), it means there are no remaining items to add for first vector. Therefore add items from the second vector
+2) if j < 0, it means there are no remaining items to add from the second vector. Therefore add items from the first vector
+3) if first_vector[i] >= second_vector[j], add item from second vector because it is smaller
+4) if second_vector[j] > first_vector[i], add item from first vector because it is smaller
+
+
+After finishing creating combined vector, I simply used another loop to print out all the items in the vector.
+After creating the program according to the design decisions above, the program has a big o of O(n)

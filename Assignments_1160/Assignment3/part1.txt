@@ -1,0 +1,22 @@
+Initial thoughts:
+
+At first glance, I thought that I would need a loop to generate 16 random characters
+After generating the string, I should organize the string in an order (lowercase first and uppercase later),
+One way of solving the problem was to sort it according to each character's ASCII values (in descending order since lowercase letters have higher ASCII values).
+However, because the instruction does not tell me to sort the string in an order, we do not necessarily need to use sorting algorithm.
+If we use the sorting algorithm such as quicksort, it will sort the whole string and the runtime complexity of the program would be O(n log n).
+I preferred to design my program to use only one loop, since the job can be done more faster ( O(n) ).
+
+Implementation:
+generating string was easy as you can create srand ranging from 65 to 122 (excluding 91 to 96) and add to our string in a loop.
+The trickest part would be recognizing lowercase/uppercase letter and swapping it accordingly.
+I used ASCII values to validate each character.
+Also to swap characters according to its correct position, I used while loop with two-pointers.
+I created two int variables low and high and compared items from the left to the items from the right.
+if the item on the left is lowercase, skip the element by incrementing low, and same goes for high.
+if vector[low] is uppercase or if vector[high] is lowercase, it means that it needs to be swapped to correct position.
+so I swap two elements if it meets the condition above.
+while loop would procede until low is bigger than high. Then the loop stops and all the lowercase letters are on the leftside.
+
+
+After creating the program according to the design decisions above, the program has a big o of O(n)
