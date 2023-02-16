@@ -2,52 +2,35 @@
 #include <vector>
 #include <algorithm>
 
-// int part(std::vector<int> &v, int low, int high, int piv)
-// {
-//   if (low > high) {
-//     return low;
-//   }
+int part(std::vector<int> &v, int low, int high, int piv)
+{
+  if (low > high) {
+    return low;
+  }
 
-//   if (piv < v[high]) {
-//     return part(v,low,high-1,piv);
-//   }
+  if (piv < v[high]) {
+    return part(v,low,high-1,piv);
+  }
 
-//   if (piv > v[low]) {
-//     return part(v,low+1,high,piv);
-//   }
-//   int temp = v[low];
-//   v[low] = v[high];
-//   v[high] = temp;
-//   return part(v,low+1,high-1,piv);
+  if (piv > v[low]) {
+    return part(v,low+1,high,piv);
+  }
+  int temp = v[low];
+  v[low] = v[high];
+  v[high] = temp;
+  return part(v,low+1,high-1,piv);
+}
 
-  // while (low <= high) {
-  //   while (piv > v[low]) {
-  //     low++;
-  //   }
-  //   while (piv < v[high]) {
-  //     high--;
-  //   }
-  //   if (low <= high) {
-  //     int temp = v[low];
-  //     v[low] = v[high];
-  //     v[high] = temp;
-  //     low++;
-  //     high--;
-  //   }
-  // }
-  // return low;
-// }
-
-// void qs(std::vector<int> &v, int low, int high)
-// {
-//   if (low >= high)
-//   {
-//     return;
-//   }
-//   int pivot = part(v, low, high, v[low]);
-//   qs(v, low, pivot - 1);
-//   qs(v, pivot, high);
-// }
+void qs(std::vector<int> &v, int low, int high)
+{
+  if (low >= high)
+  {
+    return;
+  }
+  int pivot = part(v, low, high, v[low]);
+  qs(v, low, pivot - 1);
+  qs(v, pivot, high);
+}
 
 void merge(std::vector<int> & v, int a_start, int a_end, int b_start, int b_end, std::vector<int> & w) {
   int i= a_start;
@@ -212,13 +195,14 @@ void lower_case (std::string & s) {
     }
   }
 }
+
 std::string string_gen (std::string & s) {
   lower_case(s);
+
   std::vector<bool> check (26, true);
   std::string x = "";
   for (int i =0 ; i <s.size(); i++) {
-    if ((s[i] - 97) == i)
-    check[i] = false;
+    check[(s[i] - 97)] = false;
   }
 
   for (int i=0; i <check.size(); i++) {
@@ -228,7 +212,7 @@ std::string string_gen (std::string & s) {
     }
   }
 
-  std::cout << x << std::endl;
+  // std::cout << x << std::endl;
 
   return x;
 }
@@ -242,12 +226,13 @@ int main() {
   // string_gen(x);
   // qs(v,0,v.size()-1);
   // ms(v);
-  std::cout << sumThing(v,x,10) << std::endl;
+  // std::cout << sumThing(v,x,10) << std::endl;
     // std::vector<bool> check (26, true);
-  // std::string a = "zayb";
+  std::string a = "zayb";
   // lower_case(a);
     // std::cout <<   a <<std::endl;
-  // std::cout <<   string_recur(a) <<std::endl;
+    std::cout << a << std::endl;
+  std::cout <<   string_gen(a) <<std::endl;
   // std::cout << std::endl;
   // for (auto x:check) {
   //     std::cout << x << std::endl;
@@ -259,3 +244,4 @@ int main() {
 
 // useful method to know
 // std::to_string(int value)
+//

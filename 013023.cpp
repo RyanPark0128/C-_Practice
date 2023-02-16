@@ -5,7 +5,7 @@ int part(std::vector<int> &v, int low, int high)
 {
   int piv = v[low];
 
-  while (low < high)
+  while (low <= high)
   {
     while (low < high && piv < v[high])
     {
