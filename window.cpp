@@ -4,7 +4,9 @@
 
 int main(){
   Matrix show(5);
-  show.print();
-  std::cout << "(M1)--------------------" << std::endl;
+  Matrix test(5);
+  // show.print();
+  std::cout << (show==test);
+  // show.print();
   return 0;
 }

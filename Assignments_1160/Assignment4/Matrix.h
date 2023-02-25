@@ -2,15 +2,20 @@
 #include <fstream>
 #include <math.h>
 
+
+// you have to do ifndef stuff at the top
+
+
 class Matrix {
   public:
     Matrix(std::string file);
     friend std::ostream &operator<<(std::ostream &out, const Matrix &m);
-    friend bool operator==(const Matrix & m1, const Matrix & m2);
+    bool operator==(const Matrix & m);
     std::vector<int> operator[](int i);
     friend Matrix operator*(const Matrix & m, const int multiplier);
-    friend Matrix operator+(const Matrix & m1, const Matrix & m2);
-    friend Matrix operator-(const Matrix & m1, const Matrix & m2);
+
+    Matrix operator+(const Matrix & m);
+    Matrix operator-(const Matrix & m);
     friend Matrix operator*(const Matrix & m1, const Matrix & m2);
   private:
     std::vector<std::vector<int>> v;
@@ -49,10 +54,10 @@ std::ostream &operator<<(std::ostream &out, const Matrix &m) {
 
 }
 
-bool operator==(const Matrix & m1, const Matrix & m2) {
-    for(int i = 0; i < m1.v.size(); i++){
-        for(int j = 0 ; j < m1.v[i].size() ; j++){
-          if (m1.v[i][j] != m2.v[i][j]) {
+bool Matrix::operator==(const Matrix & m) {
+    for(int i = 0; i < m.v.size(); i++){
+        for(int j = 0 ; j < m.v[i].size() ; j++){
+          if (v[i][j] != m.v[i][j]) {
             return false;
           }
       }
@@ -75,22 +80,22 @@ Matrix operator*(const Matrix & m, const int multiplier) {
   return temp;
 }
 
-Matrix operator+(const Matrix & m1, const Matrix & m2) {
-  Matrix temp = m1;
+Matrix Matrix::operator+(const Matrix & m) {
+  Matrix temp = m;
   for (int i=0; i< temp.v.size(); i++) {
     for (int j=0; j < temp.v[i].size(); j++) {
-      temp.v[i][j] += m2.v[i][j];
+      temp.v[i][j] += v[i][j];
     }
   }
 
   return temp;
 }
 
-Matrix operator-(const Matrix & m1, const Matrix & m2) {
-  Matrix temp = m1;
+Matrix Matrix::operator-(const Matrix & m) {
+  Matrix temp = m;
   for (int i=0; i< temp.v.size(); i++) {
     for (int j=0; j < temp.v[i].size(); j++) {
-      temp.v[i][j] -= m2.v[i][j];
+      temp.v[i][j] = v[i][j] - temp.v[i][j];
     }
   }
   return temp;
