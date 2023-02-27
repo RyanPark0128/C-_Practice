@@ -25,11 +25,12 @@ int main(){
    std::cout << m5 << std::endl;
    std::cout << "(M5-M2)------------------" << std::endl;
    std::cout << (m5 - m2);
-   // std::cout << "((M5-M2)*M3)-----------------" << std::endl;
-   // std::cout << (m5 - m2)*m3;
-   // std::cout << "(M1*M3)------------------" << std::endl;
-   // std::cout << m1*m3;
-   // std::cout << "(M3*M1)------------------" << std::endl;
-   // std::cout << m3*m1;
+   std::cout << "((M5-M2)*M3)-----------------" << std::endl;
+   std::cout << (m5 - m2)*m3;
+   std::cout << "(M1*M3)------------------" << std::endl;
+   std::cout << m1*m3;
+   std::cout << "(M3*M1)------------------" << std::endl;
+   std::cout << m3*m1;
+   
    return 0;
 }
