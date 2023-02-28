@@ -67,9 +67,8 @@ class Matrix {
   private:
     // create 2d vector to store 2d matrix information within the private access specifier
     std::vector<std::vector<int>> v;
-    Matrix(int row,int col){
-      v.resize(row, std::vector<int>(col));
-    }  //prototype it
+    // create new instance with row and col.
+    Matrix(int row,int col);
 };
 
 Matrix::Matrix(std::string file) {
@@ -86,6 +85,10 @@ Matrix::Matrix(std::string file) {
     }
 }
 
+Matrix::Matrix(int row,int col){
+    v.resize(row, std::vector<int>(col));
+}
+
 std::ostream &operator<<(std::ostream &out, const Matrix &m) {
   // if the matrix has size 0 or if it doesn't exist, returns right away
   if (!m.v.size()) {
@@ -96,13 +99,8 @@ std::ostream &operator<<(std::ostream &out, const Matrix &m) {
   for(int i = 0; i < m.v.size(); i++){
     out << "|";
     for(int j = 0 ; j < m.v[i].size() ; j++){
-      std::string space = "";
-
-      // this loop add spacing based on the number of digits v[i][j] have, so that it looks nice and neat in the console.
-      for (int k=0; k < 3 - log10 (m.v[i][j]); k++) {
-        space += " ";
-      }
-      out << space << m.v[i][j];
+      out << std::setw(4);
+      out << m.v[i][j];
     }
     out << "|" << std::endl;
   }
@@ -114,6 +112,9 @@ std::ostream &operator<<(std::ostream &out, const Matrix &m) {
 }
 
 bool Matrix::operator==(const Matrix & m) {
+    if (v.size() != m.v.size() || v[0].size() != m.v[0].size()) {
+      return false;
+    }
     for(int i = 0; i < m.v.size(); i++){
         for(int j = 0 ; j < m.v[i].size() ; j++){
           // if they do not equal, return false
@@ -145,6 +146,10 @@ Matrix operator*(const Matrix & m, const int multiplier) {
 }
 
 Matrix Matrix::operator+(const Matrix & m) {
+  if (v.size() != m.v.size() || v[0].size() != m.v[0].size()) {
+    Matrix temp(0,0);
+    return temp;
+  }
   // creates copy of m;
   Matrix temp = m;
   // do the addition within the nested loop
@@ -159,6 +164,10 @@ Matrix Matrix::operator+(const Matrix & m) {
 }
 
 Matrix Matrix::operator-(const Matrix & m) {
+  if (v.size() != m.v.size() || v[0].size() != m.v[0].size()) {
+    Matrix temp(0,0);
+    return temp;
+  }
   //creats a copy
   Matrix temp = m;
   //Do subtraction within the loop.
@@ -173,24 +182,18 @@ Matrix Matrix::operator-(const Matrix & m) {
 }
 
 Matrix operator*(const Matrix & m1, const Matrix & m2) {
-  // creates a copy
-  // Matrix temp = m1;
   // row and col for matrix from first Matrix class
   int r1 = m1.v.size();
   int c1 = m1.v[0].size();
   // row and col for matrix from second Matrix class
   int r2 = m2.v.size();
   int c2 = m2.v[0].size();
-  // clear the vector to resize
-  // temp.v.clear();
   // if c1 does not equal r2, it means we cannot perform matrix multiplication
   // and we dont do anything after which will return empty vec
   if (c1 == r2) {
     Matrix temp(r1,c2);
     // if the matrixs can be multiplied, then we perform the matrix multiplcation.
     // before we begin we resize the resulting matrix to appropriate size.
-      // temp.v.resize(r1, std::vector<int> (c2));
-      // Matrix temp(r1,c2);
         for (int i = 0; i < r1; i++) {
             for (int j = 0; j < c2; j++) {
                 temp.v[i][j] = 0;
