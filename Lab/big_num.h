@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <vector>
 #include <string>
-#include <algorithm>
+#include <cmath>
 
 class big_num {
    public:
@@ -15,6 +15,9 @@ class big_num {
       int size() const {return digits.size();}   
    private:
       std::vector<int> digits; // an array of numDigits digits 
+      big_num(int size) {
+         digits.resize(size);
+      }
 };
 
 big_num::big_num(std::string str) {
@@ -26,54 +29,32 @@ big_num::big_num(std::string str) {
 }
 
 big_num operator +(big_num& num, big_num& num1) {
-   big_num temp = num;
-   int min_size = std::min(num.size(),num1.size());
-   int max_size = std::max(num.size(),num1.size());
-   temp.digits.resize(max_size);
+   big_num temp = num.size() >= num1.size() ? num : num1;
+   int smaller = fmin(num.size(), num1.size());
    int carry = 0;
-
-   for (int i=0; i < min_size; i++) {
-      if (carry > 0) {
-         if ((num[i] + num1[i] + carry) == 10) {
-            temp[i] = 0;
-         } else if ((num[i] + num1[i] + carry) > 10){
-            temp[i] = ((num[i] + num1[i])%10) + 1;
-         } else {
-            temp[i] = num[i] + num1[i] + 1;
-            carry = 0;
-         }
-      } else if (carry == 0) {
-         if ((num[i] + num1[i]) == 10) {
-            temp[i] = 0;
-            carry = 1;
-         } else if ((num[i] + num1[i] + carry) > 10){
-            temp[i] = ((num[i] + num1[i])%10);
-            carry = 1;
-         } else {
-            temp[i] = num[i] + num1[i];
-            carry = 0;
-         }
-      }
-   }
-   while (carry) {
-      if (min_size > max_size) {
-         temp.digits.resize(min_size);
-         temp[min_size] += 1;
-      }
-      if ((temp[min_size] + 1) > 9 ) {
-         temp[min_size] = 0;
-         min_size++;
-      }
-      else{
-         temp[min_size] += 1;
+   for (int i = 0; i< smaller; i++) {
+      if ((num[i] + num1[i] + carry) > 9) {
+         temp[i]= (num[i] + num1[i] + carry) % 10;
+         carry = 1;
+      } else {
+         temp[i]= num[i] + num1[i] + carry;
          carry = 0;
       }
-      // if (carry && min_size == max_size) {
-      //    temp.digits.resize(min_size+1);
-      //    temp[min_size] += 1;
-      // } else if (carry) {
-      //    temp[min_size] += 1;
-      // }
+   }
+
+   while (carry == 1 && smaller < temp.size()) {
+      if ((temp[smaller] + carry) > 9) {
+         temp[smaller]= 0;
+         carry = 1;
+         smaller++;
+      } else {
+         temp[smaller] += carry;
+         carry = 0;
+      }
+   }
+   
+   if (carry) {
+      temp.digits.push_back(1);
    }
 
    return temp;
