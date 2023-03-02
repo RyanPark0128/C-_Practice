@@ -142,7 +142,7 @@ Matrix operator*(const Matrix & m, const int multiplier) {
   }
 
   //returns the Matrix class with updated matrix
-  return m;
+  return temp;
 }
 
 Matrix Matrix::operator+(const Matrix & m) {
