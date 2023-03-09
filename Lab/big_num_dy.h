@@ -7,64 +7,77 @@
 #include <cmath>
 
 class big_num {
-   public:
+    public:
       big_num(std::string str);
       friend std::ostream& operator << (std::ostream& out,  big_num&);
       friend big_num operator +( big_num& num, big_num& num1);
-      int& operator [](int i)  {return digits[i];}
-      int size() const {return digits.size();}   
-   private:
+      int& operator [](int i)  {return arr[i];}
+      // int size() const {return size;}
+    private:
       std::vector<int> digits; // an array of numDigits digits 
       big_num(int size) {
-         digits.resize(size);
+          digits.resize(size);
       }
+      int* arr;
+      int size;
+      int n;
 };
 
 big_num::big_num(std::string str) {
-   digits.resize(str.size());
-   reverse(str.begin(), str.end());
-   for (int i=0; i < str.size(); i++) {
-      digits[i] = str[i] - 48;
-   }
+    size = str.size();
+    n = str.size();
+    arr = new int(size);
+    reverse(str.begin(), str.end());
+    for (int i=0; i < n; i++) {
+        arr[i] = str[i] - 48;
+    }
 }
 
 big_num operator +(big_num& num, big_num& num1) {
-   big_num temp = num.size() >= num1.size() ? num : num1;
-   int smaller = fmin(num.size(), num1.size());
-   int carry = 0;
-   for (int i = 0; i< smaller; i++) {
-      if ((num[i] + num1[i] + carry) > 9) {
-         temp[i]= (num[i] + num1[i] + carry) % 10;
-         carry = 1;
-      } else {
-         temp[i]= num[i] + num1[i] + carry;
-         carry = 0;
-      }
-   }
+    big_num temp = num.n >= num1.n ? num : num1;
+    int smaller = fmin(num.n, num1.n);
+    int carry = 0;
+    for (int i = 0; i< smaller; i++) {
+        if ((num[i] + num1[i] + carry) > 9) {
+          temp[i]= (num[i] + num1[i] + carry) % 10;
+          carry = 1;
+        } else {
+          temp[i]= num[i] + num1[i] + carry;
+          carry = 0;
+        }
+    }
 
-   while (carry == 1 && smaller < temp.size()) {
-      if ((temp[smaller] + carry) > 9) {
-         temp[smaller]= 0;
-         carry = 1;
-         smaller++;
-      } else {
-         temp[smaller] += carry;
-         carry = 0;
+    while (carry == 1 && smaller < temp.n) {
+        if ((temp[smaller] + carry) > 9) {
+          temp[smaller]= 0;
+          carry = 1;
+          smaller++;
+        } else {
+          temp[smaller] += carry;
+          carry = 0;
+        }
+    }
+    
+    if (carry) {
+      temp.size += 1;
+      int * x = new int[temp.size];
+      for (int i =0; i< temp.n; i++) {
+            x[i] = temp.arr[i];
       }
-   }
-   
-   if (carry) {
-      temp.digits.push_back(1);
-   }
+      delete[] temp.arr;
+      temp.arr = x;
+      temp.arr[temp.n++] = 1;
+    }
 
-   return temp;
+  return temp;
 }
 
 std::ostream& operator << (std::ostream& out,  big_num& num) {
-   for (int i=num.size()-1; i >= 0; i--) {
-      out << num[i];
-   }
-   return out;
+    for (int i=num.n-1; i >= 0; i--) {
+        out << num.arr[i];
+    }
+
+    return out;
 }
 
 
