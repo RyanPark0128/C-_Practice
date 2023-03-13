@@ -1,32 +1,16 @@
 #ifndef LL_H
 #define LL_H
 #include <iostream>
-
+// template <typename T>
 class ll {
   public:
     ll();
     void insert(int x);
     void remove(int x);
     friend std::ostream & operator <<(std::ostream & out, const ll & rhs);
-
-    ~ll() {
-      delete_list();
-    }
-
-    ll(const ll& rhs) {
-      head = copy(rhs.head);
-      std::cout << "Copy" << std::endl;
-    }
-
-    const ll & operator=(const ll& rhs) {
-      if (this == &rhs) {
-        return *this;
-      }
-      delete_list();
-      head = copy(rhs.head);
-      std::cout << "Assignment" <<std::endl;
-      return *this;
-    }
+    ~ll();
+    ll(const ll& rhs);
+    const ll & operator=(const ll& rhs);
   private:
     struct node{
       int data;
@@ -35,28 +19,34 @@ class ll {
     node* head;
     node * insert(int x, node* p);
     node * remove(int x, node* p);
-    node * copy(node*p) {
-      if(!p) {
-        return p;
-      }
-      return new node{p->data, copy(p->next)};
-    }
-    void delete_list() {
-      while(head) {
-        node* tmp = head;
-        head = head->next;
-        delete tmp;
-      }
-      std::cout << "deleted" << std::endl;
-    }
+    node * copy(node*p);
+    void delete_list();
 };
 
 ll::ll() {
   head = nullptr;
 }
 
+ll::~ll() {
+  delete_list();
+}
+ll::ll(const ll& rhs) {
+  head = copy(rhs.head);
+  std::cout << "Copy" << std::endl;
+}
+
 void ll::insert(int x) {
   head = insert(x, head);
+}
+
+const ll & ll::operator=(const ll& rhs) {
+  if (this == &rhs) {
+    return *this;
+  }
+  delete_list();
+  head = copy(rhs.head);
+  std::cout << "Assignment" <<std::endl;
+  return *this;
 }
 
 ll::node* ll::insert(int x, ll::node* p) {
@@ -65,6 +55,22 @@ ll::node* ll::insert(int x, ll::node* p) {
   }
   p->next = insert(x,p->next);
   return p;
+}
+
+ll::node * ll::copy(ll::node*p) {
+  if(!p) {
+    return p;
+  }
+  return new ll::node{p->data, copy(p->next)};
+}
+
+void ll::delete_list() {
+  while(head) {
+    node* tmp = head;
+    head = head->next;
+    delete tmp;
+  }
+  std::cout << "deleted" << std::endl;
 }
 
 std::ostream & operator <<(std::ostream & out, const ll & rhs) {
