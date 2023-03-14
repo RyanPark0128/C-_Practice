@@ -1,7 +1,7 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 #include <iostream>
-#include <vector>
+// #include <vector>
 #include <fstream>
 #include <math.h>
 
@@ -11,6 +11,7 @@
 // Correctly implemented?
 // good practice on order of the member functions, constructors, destructors, assignment
 // adding if statements generate COPY.
+// Why use "this" when copying values.
 
 
 class Matrix {
@@ -197,11 +198,11 @@ const Matrix& Matrix::operator= (const Matrix& rhs) {
   this->col = rhs.col;
   this->arr = new int*[rhs.row];
   for (int i=0; i< rhs.row; i++) {
-    arr[i] = new int[rhs.col];
+    this->arr[i] = new int[rhs.col];
   }
   for(int i = 0; i < rhs.row; i++){
     for(int j = 0 ; j < rhs.col ; j++){
-      arr[i][j] = rhs.arr[i][j];
+      this->arr[i][j] = rhs.arr[i][j];
     }
   }
   std::cout << "Assignment" << std::endl;
