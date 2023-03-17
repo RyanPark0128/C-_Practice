@@ -1,0 +1,11 @@
+For the assignment you have to make a DEEP copy of the dynamic array inside the linklist then copy the link list that is due march 23.
+
+
+Lecture today : STACK.
+
+push(x) <- add x to the top
+pop(x) <-remove from the top item. THIS does not return all the time.
+peek() <- look at the item without moving anything. This returns the item to the user to show what they want to peek.
+isEmpty <- to check if your stack is empty or has anything with it.
+popback() <- when you want to remove it from the stack. 
+
