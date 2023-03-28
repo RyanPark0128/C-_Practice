@@ -75,7 +75,7 @@ bool path_finder (std::vector<std::vector<int>> & v,std::vector<std::vector<char
 
 //input: takes in input value from user as string
 //output: the readIn function populates the 2d vector from the file and returns the 2d vector.
-std::vector<std::vector<int> > readIn(std::string file){
+std::vector<std::vector<int>> readIn(std::string file){
     std::ifstream fin;
     fin.open(file);
     int row,col;
