@@ -5,20 +5,30 @@
 template <typename T>
 class stack{
     public:
+        // basic constructor
         stack();
+        // peeks the top value and returns the value
         T peek();
+        // pushes new item into the stack
         void push(T);
+        // pops the item at the top and returns it
         T pop();
+        // checks if the stack is empty or not
         bool isEmpty();
 
+        // delete memory
         ~stack();
+        // copy function
         stack(const stack<T> & rhs);
+        // assignment fucntion
         const stack<T>& operator=(const stack<T>&);
     private:
+        // struct for linked list in stack
         struct node{
             T data;
             node* next;
         };
+        // top
         node* top;
 };
 
@@ -57,7 +67,11 @@ bool stack<T>::isEmpty(){
 
 template <typename T>
 stack<T>::~stack(){
-    delete[] top;
+    while(top){
+        node* tmp = top;
+        top = top -> next;
+        delete tmp;
+    }
 }
 
 template <typename T>
@@ -85,6 +99,7 @@ const stack<T>& stack<T>::operator=(const stack<T>& rhs){
         top = top->next;
         delete temp;
     }
+    top = nullptr;
     if(rhs.top){
         top = new node{rhs.top->data,top};
         node* tail = top;
@@ -95,5 +110,7 @@ const stack<T>& stack<T>::operator=(const stack<T>& rhs){
             p = p->next;
         }
     }
+
+    return *this;
 }
 #endif
